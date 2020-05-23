@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+
+{% block heading %}
+    <h1 id="heading">Messages: {{ name }}</h1>
+    <a href="{{ url_for('channels') }}">
+        <button id="logout">Channels</button>
+    </a>
+    <script type="text/javascript" src="{{ url_for('static', filename='index.js') }}"></script>
+
+{% endblock %}
+
+{% block body %}
+    <ul id="messages">
+        {% for message in messages %}
+            {% if message.get_content() and message.get_image() %}
+                <li>
+                    From {{ message.get_username() }} at {{ message.get_time() }}: {{ message.get_content() }}
+                    <img src="{{ message.get_image() }}" width="200"/>
+                </li>
+            {% elif message.get_content() %}
+                <li>
+                    From {{ message.get_username() }} at {{ message.get_time() }}: {{ message.get_content() }}
+                </li>
+            {% elif message.get_image() %}
+                <li>
+                    From {{ message.get_username() }} at {{ message.get_time() }}: <img src="{{ message.get_image() }}" width="200"/>
+                </li>
+            {% endif %}
+        {% else %}
+            <li id="empty">You have not added a message in this channel. Add a message!</li>
+        {% endfor %}
+    </ul>        
+
+    <form id="form" accept="image/*" enctype="multipart/form-data">
+        <input id="message" autocomplete="off" autofocus placeholder="Enter Message" type="text">
+        <input id="file" type="file" placeholder="Choose File">
+        <input type="submit" value="Send">
+    </form>
+
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+
+{% block heading %}
+    <h1 id="heading">All Channels</h1>
+{% endblock %}
+
+{% block body %}
+    <style>
+        li {
+            display: block;
+        }
+    </style>
+    <ol style="text-align: center;">
+        {% for i in range(channels|length) %}
+            <li>
+                <a href="{{ url_for('channel', channel_id=i) }}">{{ channels[i].get_name() }}</a>
+            </li>
+        {% else %}
+            <li>No channels</li>
+        {% endfor %}
+    </ol>
+    <div >
+        <h3>Add a channel!</h3>
+        <form action="{{ url_for('channels') }}" method='POST'>
+            <div>
+                <div>Enter name of new channel:</div>
+                <input name="channel_name" size="30" placeholder="Channel Name">
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Add channel!</button>
+            </div>
+        </form>
+    </div>
+    
+{% endblock %}

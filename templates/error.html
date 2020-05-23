@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+
+{% block heading %}
+    <h1 id="heading">{{ heading }}</h1>
+{% endblock %}
+
+{% block body %}
+    <h3>{{ message }}</h3>
+    <a href="{{ url_for('index') }}">
+        <button class="btn btn-warning">Retry</button>
+    </a> 
+{% endblock %}

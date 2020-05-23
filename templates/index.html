@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+
+{% block heading %}
+    {% if username %}
+        <h1 id="heading">Welcome {{ username }}!</h1>
+    {% else %}
+        <h1 id="heading">Welcome to the Chat Server!</h1>
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+    <form style="text-align: center" action="{{ url_for('channels') }}" method="POST">
+        {% if not username %}
+            <div>
+                <h4>Enter username:</h4> 
+                <input name="name" size="30" placeholder="Username">
+            </div>
+        {% endif %}
+        <div>
+            <button type="submit" class="btn btn-primary">Start Chatting!</button>
+        </div>
+    </form>
+{% endblock %}
+    
